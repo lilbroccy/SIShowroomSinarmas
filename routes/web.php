@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CarUnitController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +23,13 @@ Route::get('/', function () {
 
 Route::get('/index', function () {
     return view('index');
-});
+})->name('index');
+
 Route::get('/tes', function () {
-    return view('tes');
+    return view('indextanpayield');
 });
+
+// View
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/categories/index', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/carunits/index', [CarUnitController::class, 'index'])->name('carunit.index');
