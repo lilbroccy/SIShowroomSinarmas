@@ -1,18 +1,8 @@
 @extends('layoutuser.index')
 @section('title', 'Halaman Utama')
-
+@section('css')
+@endsection
 @section('content')
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
-<style>
-    .shop-img img {
-        width: 100%; /* Atur lebar gambar menjadi 100% dari lebar kontainer */
-        height: 210px; /* Atur tinggi gambar agar sesuai proporsi */
-    }
-</style>
 <!-- SECTION -->
 <div class="section">
 	<!-- container -->
@@ -82,7 +72,7 @@
 											<div class="product-btns">
 												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 												<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-												<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+												<button class="quick-view" data-id="{{ $carUnit->id }}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 											</div>
 										</div>
 										<div class="add-to-cart">
@@ -157,16 +147,7 @@
 @endsection
 @section('js')
 <script>
-    // Fungsi untuk menampilkan SweetAlert saat tombol "quick view" diklik
-    $(document).on('click', '.quick-view', function() {
-        // Tambahkan skrip SweetAlert di sini
-        Swal.fire({
-            title: 'Quick View',
-            text: 'Ini adalah detail mobil.',
-            icon: 'info',
-            confirmButtonText: 'OK'
-        });
-    });
+    var assetUrl = "{{ asset('img/photos/') }}";
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('js/sweetalert.js') }}"></script>
 @endsection

@@ -449,6 +449,11 @@ textarea.input {
   background-color: #00878b;
 }
 
+.shop-img img {
+    width: 100%; /* Atur lebar gambar menjadi 100% dari lebar kontainer */
+    height: 210px; /* Atur tinggi gambar agar sesuai proporsi */
+}
+
 .header-logo {
   float: left;
 }

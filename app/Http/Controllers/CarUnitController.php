@@ -56,5 +56,36 @@ class CarUnitController extends Controller
             ->with('success', 'Car Unit created successfully.');
     }
 
-    // Metode lainnya seperti edit, update, destroy, dll.
-}
+    //GetDetailMobilToSwetAlert
+    public function getDetail($id)
+    {
+        $carUnit = CarUnit::find($id);
+
+        if (!$carUnit) {
+            return response()->json(['error' => 'Car unit not found'], 404);
+        }
+
+        $secondPhotoUrl = null;
+        $thirdPhotoUrl = null;
+
+        $photos = $carUnit->photos;
+
+        if ($photos->count() > 1) {
+            $secondPhotoUrl = $photos[1]->file_path;
+        }
+
+        if ($photos->count() > 2) {
+            $thirdPhotoUrl = $photos[2]->file_path;
+        }
+
+        // Mengembalikan detail carUnit dalam format JSON
+        return response()->json([
+            'name' => $carUnit->name,
+            'price' => $carUnit->price,
+            'description' => $carUnit->description,
+            'image_url_1' => $carUnit->photos->first()->file_path,
+            'image_url_2' => $secondPhotoUrl,
+            'image_url_3' => $thirdPhotoUrl
+        ]);
+    }
+    }

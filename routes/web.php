@@ -33,3 +33,6 @@ Route::get('/tes', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories/index', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/carunits/index', [CarUnitController::class, 'index'])->name('carunit.index');
+
+//SweetAlert
+Route::get('/get-carunit-detail/{id}', [CarUnitController::class, 'getDetail'])->name('carunit.detail');
