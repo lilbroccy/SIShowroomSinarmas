@@ -149,5 +149,4 @@
 <script>
     var assetUrl = "{{ asset('img/photos/') }}";
 </script>
-<script src="{{ asset('js/sweetalert.js') }}"></script>
 @endsection

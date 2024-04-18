@@ -1,14 +1,9 @@
 $(document).on('click', '.quick-view', function() {
-    // Mendapatkan ID carUnit dari atribut data-id tombol yang ditekan
     var carUnitId = $(this).data('id');
-    // Di sini Anda dapat menggunakan carUnitId untuk mengambil detail carUnit dari server
-    // Untuk contoh, saya akan menambahkan kode untuk menampilkan gambar dan detail mobil dalam modul quick view.
-    // Contoh pengambilan detail carUnit dari server (diasumsikan menggunakan AJAX)
     $.ajax({
-        url: '/get-carunit-detail/' + carUnitId, // Ganti dengan URL yang sesuai untuk mengambil detail carUnit dari server
+        url: '/get-carunit-detail/' + carUnitId, 
         method: 'GET',
         success: function(response) {
-            // Menampilkan detail carUnit dalam modul quick view
             Swal.fire({
                 title: 'Quick View',
                 html: '<div class="carousel-container">' +
@@ -19,9 +14,14 @@ $(document).on('click', '.quick-view', function() {
                         '</div>' +
                     '</div>' +
                     '<div class="quick-view-details">' +
-                        '<h3>' + response.name + '</h3>' + // Menampilkan detail mobil lainnya
+                        '<h3>' + response.name + '</h3>' +
                         '<p>Price: Rp. ' + response.price + '</p>' +
                         '<p>Description: ' + response.description + '</p>' +
+                    '</div>'+
+                    '<div class="quick-view-buttons">' +
+                        '<button class="btn btn-primary"><i class="fa fa-calendar"></i> Booking Now</button>' +
+                        '<button class="btn btn-success"><i class="fa fa-whatsapp"></i> Share to WhatsApp</button>' +
+                        '<button class="btn btn-info"><i class="fa fa-info-circle"></i> Detail Lengkap</button>' +
                     '</div>',
                 showCloseButton: true,
                 showConfirmButton: false,
@@ -39,7 +39,6 @@ $(document).on('click', '.quick-view', function() {
             });
         },
         error: function(xhr, status, error) {
-            // Penanganan kesalahan jika gagal mengambil detail carUnit
             console.error(error);
             Swal.fire({
                 title: 'Error',
@@ -50,3 +49,45 @@ $(document).on('click', '.quick-view', function() {
         }
     });
 });
+
+
+
+//SWEET ALERT LOGOUT
+document.addEventListener('DOMContentLoaded', function() {
+    var logoutButton = document.getElementById('logout-button');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah form submit default
+            Swal.fire({
+                title: 'Logout',
+                text: 'Anda yakin ingin logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit form untuk logout
+                    document.getElementById('logout-form').submit();
+                }
+            });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = "/login";
+        });
+    }
+});
+
+
+
+
+
+    

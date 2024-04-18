@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CarUnitController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -17,17 +18,17 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/index', function () {
+Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/tes', function () {
-    return view('indextanpayield');
-});
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
 // View
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -36,3 +37,11 @@ Route::get('/carunits/index', [CarUnitController::class, 'index'])->name('caruni
 
 //SweetAlert
 Route::get('/get-carunit-detail/{id}', [CarUnitController::class, 'getDetail'])->name('carunit.detail');
+
+//Auth
+Route::middleware('web')->group(function () {
+    // Rute untuk login dan logout
+    Route::post('/loginUser', [AuthController::class, 'login'])->name('loginUser');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // Rute lainnya...
+});
